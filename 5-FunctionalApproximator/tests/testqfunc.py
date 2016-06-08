@@ -8,7 +8,7 @@ from policy     import *;
 class qfunc_tester(unittest.TestCase):
     def test(self):
         policy = Policy();
-        for i in xrange(len(policy.theta)):
+        for i in range(len(policy.theta)):
             policy.theta[i] = 1.0;
 
         f  = np.array([1,1,1,1])

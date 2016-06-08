@@ -15,7 +15,7 @@ def gen_trajectories(mdp, policy, num):
         trajectories = [];
         gamma  = mdp.getGamma();
 
-        for iter1 in xrange(num):
+        for iter1 in range(num):
             trajectory = Trajectory();             
             s  = mdp.start();
             trajectory.states.append(s);            
@@ -35,7 +35,7 @@ def gen_trajectories(mdp, policy, num):
                 a = actions[len(actions)-1];
                 p = ra.random();
                 sum1 = 0.0;
-                for i in xrange(len(actions)):
+                for i in range(len(actions)):
                     sum1 += prob[i];
                     if sum1 >= p:   
                         a = actions[i];

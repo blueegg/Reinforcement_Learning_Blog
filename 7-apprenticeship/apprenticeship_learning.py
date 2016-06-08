@@ -14,8 +14,8 @@ class Apprenticeship_Learning:
         self.mdp          = mdp;
         for s in mdp.states:
             break;        
-        self.theta        = np.array([ ra.random() for i in xrange(len(mdp.feas[s])) ]); 
-        self.trajectories_u = np.array([ 0.0 for i in xrange(len(mdp.feas[s])) ]);
+        self.theta        = np.array([ ra.random() for i in range(len(mdp.feas[s])) ]); 
+        self.trajectories_u = np.array([ 0.0 for i in range(len(mdp.feas[s])) ]);
 
     def state_reward(self, state_fea):
         return np.dot(state_fea, self.theta);
@@ -23,8 +23,8 @@ class Apprenticeship_Learning:
     def compute_u(self, trajectories):
         for t in trajectories:
             coeff = 1;
-            u     = np.array([ 0.0 for i in xrange(len(self.theta)) ]);
-            for i in xrange(len(t.states)): 
+            u     = np.array([ 0.0 for i in range(len(self.theta)) ]);
+            for i in range(len(t.states)): 
                 u       += coeff * mdp.feas[t.states[i]]; 
                 coeff  *= mdp.gamma;
             self.trajectories_u += u;
@@ -40,12 +40,12 @@ class Apprenticeship_Learning:
 
         for t in trajectories:
             G = 0.0;   
-            for i in xrange(len(t.states)-1,0,-1):
+            for i in range(len(t.states)-1,0,-1):
                 s  = t.states[i];
                 r  = self.state_reward(mdp.feas[s]);
                 G *= self.mdp.gamma; 
                 G += r; 
-            for i in xrange(len(t.states)-1):
+            for i in range(len(t.states)-1):
                 s  = t.states[i];
                 a  = t.actions[i];
                 policy.q["%s_%s"%(s,a)] += G;
@@ -63,19 +63,19 @@ class Apprenticeship_Learning:
     def guess_reward(self, policys):
         gamma = LpVariable("gamma");
         theta = [];
-        for i in xrange(len(self.theta)):
+        for i in range(len(self.theta)):
             theta.append(LpVariable("theta_%d"%(i), -1.0,1.0));
 
         prob = LpProblem("guess_reward", LpMaximize);
         e = 0
-        for i in xrange(len(self.theta)):
+        for i in range(len(self.theta)):
             e += theta[i]
         prob += e < 1
         prob += e > -1
 
         for p in policys:
             e = 0
-            for u in xrange(len(self.trajectories_u)):
+            for u in range(len(self.trajectories_u)):
                 e += theta[u] * self.trajectories_u[u]
                 e -= theta[u] * p.u[u]
             e -= gamma
@@ -84,7 +84,7 @@ class Apprenticeship_Learning:
         
 
         prob.solve()
-        for i in xrange(len(self.theta)):
+        for i in range(len(self.theta)):
             self.theta[i] = value(theta[i])
 
 
@@ -96,7 +96,7 @@ class Apprenticeship_Learning:
         
         self.compute_u(trajectories);
 
-        for iter1 in xrange(epoches):
+        for iter1 in range(epoches):
             self.guess_reward(policys);
             policy = self.learn_policy(trajectories);
             policy.compute_u(mdp);
@@ -117,12 +117,12 @@ if __name__ == "__main__":
     trajectories           = gen_trajectories(mdp, optimal_e_policy, 5000);    
 
     policys, theta         = learner.learning(mdp, trajectories, epoches = 20);
-    for i in xrange(len(policys)):
+    for i in range(len(policys)):
         differ =  evaluate(policys[i], optimal_e_policy, mdp);
         y.append(differ);
-        print "iter %d: %f"%(i,differ);     
+        print("iter %d: %f"%(i,differ))     
     for s in mdp.states:
-        print "state %s reward %f"%(s,np.dot(theta,mdp.feas[s])); 
+        print("state %s reward %f"%(s,np.dot(theta,mdp.feas[s]))) 
 
     plt.plot(y);
     plt.xlabel("number of iterations");

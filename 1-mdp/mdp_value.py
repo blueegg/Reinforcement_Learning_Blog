@@ -11,11 +11,11 @@ def random_pi():
     return actions[r]
 
 def compute_random_pi_state_value():
-    value = [ 0.0 for r in xrange(9)]
+    value = [ 0.0 for r in range(9)]
     num   = 1000000
 
-    for k in xrange(1,num):
-        for i in xrange(1,6):       
+    for k in range(1,num):
+        for i in range(1,6):       
             mdp = Mdp();
             s   = i;
             is_terminal = False
@@ -30,9 +30,9 @@ def compute_random_pi_state_value():
             value[i] = (value[i] * (k-1) + v) / k
 
         if k % 10000 == 0:
-            print value
+            print(value)
 
-    print value
+    print(value)
 
 compute_random_pi_state_value()
         

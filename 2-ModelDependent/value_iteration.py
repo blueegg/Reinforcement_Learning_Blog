@@ -5,7 +5,7 @@ from grid_mdp import Grid_Mdp
 
 class Policy_Value:
     def __init__(self, grid_mdp):
-        self.v  = [ 0.0 for i in xrange(len(grid_mdp.states) + 1)]
+        self.v  = [ 0.0 for i in range(len(grid_mdp.states) + 1)]
         
         self.pi = dict()
         for state in grid_mdp.states:
@@ -14,7 +14,7 @@ class Policy_Value:
             self.pi[state] = grid_mdp.actions[ 0 ]
     
     def value_iteration(self, grid_mdp):
-        for i in xrange(1000):
+        for i in range(1000):
    
             delta = 0.0;
             for state in grid_mdp.states:
@@ -45,12 +45,12 @@ if __name__ == "__main__":
         policy_value.value_iteration(grid_mdp)
         
         
-        print "value:"
-        for i in xrange(1,6):
-            print "%d:%f\t"%(i,policy_value.v[i]),
-        print ""
+        print("value:")
+        for i in range(1,6):
+            print("%d:%f\t"%(i,policy_value.v[i]), end="")
+        print("")
  
-        print "policy:"
-        for i in xrange(1,6):
-            print "%d->%s\t"%(i,policy_value.pi[i]),
-        print ""
+        print("policy:")
+        for i in range(1,6):
+            print("%d->%s\t"%(i,policy_value.pi[i]), end="")
+        print("")

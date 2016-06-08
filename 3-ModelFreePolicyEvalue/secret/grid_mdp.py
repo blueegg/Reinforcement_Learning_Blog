@@ -74,7 +74,7 @@ class Grid_Mdp:
         state_sample  = [];
         action_sample = [];
         reward_sample = [];
-        for i in xrange(num):
+        for i in range(num):
                 s_tmp = []
                 a_tmp = []
                 r_tmp = []

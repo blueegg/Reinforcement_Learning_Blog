@@ -53,7 +53,7 @@ class Apprenticeship_Policy(Policy):
         self.actions = mdp.actions; 
         self.q       = dict();
         for s in mdp.states:
-            self.u  = np.array([ 0.0 for i in xrange(len(mdp.feas[s])) ]);
+            self.u  = np.array([ 0.0 for i in range(len(mdp.feas[s])) ]);
             break;
         for s in mdp.states:
             for a in mdp.actions:
@@ -74,9 +74,9 @@ class Apprenticeship_Policy(Policy):
     def compute_u(self, mdp):
         n      = 1000;
         gamma  = mdp.getGamma();
-        self.u = np.array([ 0.0 for i in xrange(len(self.u)) ]);
+        self.u = np.array([ 0.0 for i in range(len(self.u)) ]);
 
-        for iter1 in xrange(n):
+        for iter1 in range(n):
             
             s  = mdp.start();
             u1 = copy.deepcopy(mdp.feas[s]);
@@ -96,7 +96,7 @@ class Apprenticeship_Policy(Policy):
                 a = actions[len(actions)-1];
                 p = ra.random();
                 sum1 = 0.0;
-                for i in xrange(len(actions)):
+                for i in range(len(actions)):
                     sum1 += prob[i];
                     if sum1 >= p:   
                         a = actions[i];

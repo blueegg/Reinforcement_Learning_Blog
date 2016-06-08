@@ -11,6 +11,6 @@ class test(unittest.TestCase):
         r = [[0,0,1],[0,1]]
 
         vfunc = td(0.5,0.5,s,a,r)
-        print vfunc
+        print(vfunc)
 
 

@@ -20,10 +20,10 @@ def mc(grid, policy, evaler, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
     y = []
-    for i in xrange(len(policy.theta)):
+    for i in range(len(policy.theta)):
         policy.theta[i] = 0.1
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
 
         y.append(evaler.eval(policy))
         s_sample = []
@@ -46,11 +46,11 @@ def mc(grid, policy, evaler, num_iter1, alpha):
 
 
         g = 0.0
-        for i in xrange(len(f_sample)-1, -1, -1):
+        for i in range(len(f_sample)-1, -1, -1):
             g *= gamma
             g += r_sample[i];
         
-        for i in xrange(len(f_sample)):
+        for i in range(len(f_sample)):
             update(policy, f_sample[i], a_sample[i], g, alpha)
 
             g -= r_sample[i];
@@ -63,10 +63,10 @@ def sarsa(grid, policy, evaler, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
     y = []
-    for i in xrange(len(policy.theta)):
+    for i in range(len(policy.theta)):
         policy.theta[i] = 0.1
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
         y.append(evaler.eval(policy))
         f = grid.start();
         a = actions[int(random.random() * len(actions))]
@@ -88,10 +88,10 @@ def qlearning(grid, policy, evaler, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
     y = []
-    for i in xrange(len(policy.theta)):
+    for i in range(len(policy.theta)):
         policy.theta[i] = 0.1
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
         y.append(evaler.eval(policy))
 
         f = grid.start();    

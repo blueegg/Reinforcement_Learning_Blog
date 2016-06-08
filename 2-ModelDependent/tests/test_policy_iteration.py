@@ -32,6 +32,6 @@ class policy_iteration_test(unittest.TestCase):
         policy_value.v[8] = 8
 
         policy_value.policy_improve(grid_mdp);
-        for i in xrange(1,5):
+        for i in range(1,5):
             self.assertEqual(policy_value.pi[i], 'e')
         self.assertEqual(policy_value.pi[5], 's')

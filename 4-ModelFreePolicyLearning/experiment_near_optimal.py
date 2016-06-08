@@ -13,17 +13,17 @@ if __name__ == "__main__":
     plt.figure(figsize=(12,6))
 
     ########## e-greedy vs greedy ######
-    print "epsilon = 0.5"
+    print("epsilon = 0.5")
     qfunc =  mc(num_iter1 = 5000, epsilon = 0.9)
     for s in states:
         for a in actions:
             key = "%d_%s"%(s,a)
-            print "%d_%s:%f"%(s,a,qfunc[key])
-    print "best"
+            print("%d_%s:%f"%(s,a,qfunc[key]))
+    print("best")
     for s in states:
         for a in actions:
             key = "%d_%s"%(s,a)
-            print "%d_%s:%f"%(s,a,best[key])
+            print("%d_%s:%f"%(s,a,best[key]))
         
 
 

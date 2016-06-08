@@ -41,7 +41,7 @@ def update_obstacle(gap_x, miss_obstacleid):
                         "max_obstacleid(%d) - miss_obstacles(%d) - 1"\
                         %(max_obstacleid, miss_obstacles))
 
-    for i in xrange(20):
+    for i in range(20):
         if i >= miss_obstacleid and i < miss_obstacleid + miss_obstacles:
             continue;
         screen.blit(obstacle, (gap_x, i * obstacle_size[1]));

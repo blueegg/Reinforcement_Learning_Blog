@@ -16,7 +16,7 @@ def greedy_pi_q(state, epsilon):
     amax    = 0
     key     = "%d_%s"%(state, actions[0])
     qmax    = qfunc[key]
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         key = "%d_%s"%(state, actions[i])
         q   = qfunc[key]
         if qmax < q:
@@ -24,15 +24,15 @@ def greedy_pi_q(state, epsilon):
             amax  = i; 
     
     ##probability
-    pro = [0.0 for i in xrange(len(actions))]
+    pro = [0.0 for i in range(len(actions))]
     pro[amax] += 1 - epsilon
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         pro[i] += epsilon / len(actions)
 
     ##choose
     r = random.random()
     s = 0.0
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         s += pro[i]
         if s >= r: return actions[i]
     return actions[len(actions)-1]
@@ -43,7 +43,7 @@ def gensample():
     state_sample  = [];
     action_sample = [];
     reward_sample = []
-    for i in xrange(1000):
+    for i in range(1000):
         s_tmp = []
         a_tmp = []
         r_tmp = []
@@ -68,8 +68,8 @@ def qlearning_off_policy(alpha, state_sample, action_sample, reward_sample):
         for a in actions:
             qfunc["%d_%s"%(s,a)] = 0.0
     
-    for iter1 in xrange(len(state_sample)):
-        for step in xrange(len(state_sample[iter1])):
+    for iter1 in range(len(state_sample)):
+        for step in range(len(state_sample[iter1])):
             s = state_sample[iter1][step]
             a = action_sample[iter1][step]
             r = reward_sample[iter1][step]
@@ -89,11 +89,11 @@ def qlearning_off_policy(alpha, state_sample, action_sample, reward_sample):
             qfunc[key] += alpha *( r + gamma * qmax - qfunc[key])
 
 
-    print ""
-    print "qlearing_off_policy"    
+    print("")
+    print("qlearing_off_policy")    
     for s in states:
         for a in actions:
-            print "%d_%s:%f"%(s,a,qfunc["%d_%s"%(s,a)])
+            print("%d_%s:%f"%(s,a,qfunc["%d_%s"%(s,a)]))
 
 
 

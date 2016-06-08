@@ -8,7 +8,7 @@ class trajectories_test(unittest.TestCase):
         optimal_e_policy = Optimal_Epsilon_Policy(0.1);
         mdp              = Grid_Mdp();
         ts               = gen_trajectories(mdp, optimal_e_policy, 20);
-        for i in xrange(20):
+        for i in range(20):
             print ts[i].states;
             print ts[i].actions;
         self.assertEquals(len(ts),20);

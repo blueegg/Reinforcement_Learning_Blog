@@ -21,7 +21,7 @@ def update_softmaxpolicy(softmaxpolicy, f, a, qvalue, alpha):
     prob = softmaxpolicy.pi(f);
     
     delta_logJ = fea;
-    for i in xrange(len(softmaxpolicy.actions)):
+    for i in range(len(softmaxpolicy.actions)):
         a1          = softmaxpolicy.actions[i];
         fea1        = softmaxpolicy.get_fea_vec(f,a1);
         delta_logJ -= fea1 * prob[i];
@@ -33,10 +33,10 @@ def update_softmaxpolicy(softmaxpolicy, f, a, qvalue, alpha):
 def mc(grid,softmaxpolicy, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
-    for i in xrange(len(policy.theta)):
+    for i in range(len(policy.theta)):
         policy.theta[i] = 0.1
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
 
         f_sample = []
         a_sample = []
@@ -56,11 +56,11 @@ def mc(grid,softmaxpolicy, num_iter1, alpha):
 
 
         g = 0.0
-        for i in xrange(len(f_sample)-1, -1, -1):
+        for i in range(len(f_sample)-1, -1, -1):
             g *= gamma
             g += r_sample[i];
         
-        for i in xrange(len(f_sample)):
+        for i in range(len(f_sample)):
             update_softmaxpolicy(solftmaxpolicy, f_sample[i], a_sample[i], g, alpha)
 
             g -= r_sample[i];
@@ -73,13 +73,13 @@ def sarsa(grid, evaler, softmaxpolicy, valuepolicy, num_iter1, alpha):
     actions = grid.actions;
     gamma   = grid.gamma;
     y       = [];
-    for i in xrange(len(valuepolicy.theta)):
+    for i in range(len(valuepolicy.theta)):
         valuepolicy.theta[i]  = 0.1
-    for i in xrange(len(softmaxpolicy.theta)): 
+    for i in range(len(softmaxpolicy.theta)): 
         softmaxpolicy.theta[i] = 0.0;
     
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
         y.append(evaler.eval(valuepolicy))
         f = grid.start();
         a = actions[int(random.random() * len(actions))]

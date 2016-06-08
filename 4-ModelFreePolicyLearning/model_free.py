@@ -36,7 +36,7 @@ def epsilon_greedy(qfunc, state, epsilon):
     amax    = 0
     key     = "%d_%s"%(state, actions[0])
     qmax    = qfunc[key]
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         key = "%d_%s"%(state, actions[i])
         q   = qfunc[key]
         if qmax < q:
@@ -44,15 +44,15 @@ def epsilon_greedy(qfunc, state, epsilon):
             amax  = i; 
     
     ##probability
-    pro = [0.0 for i in xrange(len(actions))]
+    pro = [0.0 for i in range(len(actions))]
     pro[amax] += 1- epsilon
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         pro[i] += epsilon / len(actions)
 
     ##choose
     r = random.random()
     s = 0.0
-    for i in xrange(len(actions)):
+    for i in range(len(actions)):
         s += pro[i]
         if s >= r: return actions[i]
     return actions[len(actions)-1]
@@ -69,7 +69,7 @@ def mc(num_iter1, epsilon):
             qfunc["%d_%s"%(s,a)] = 0.0
             n["%d_%s"%(s,a)] = 0.001
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
         x.append(iter1);
         y.append(compute_error(qfunc))
 
@@ -90,11 +90,11 @@ def mc(num_iter1, epsilon):
             count += 1
 
         g = 0.0
-        for i in xrange(len(s_sample)-1, -1, -1):
+        for i in range(len(s_sample)-1, -1, -1):
             g *= gamma
             g += r_sample[i];
                 
-        for i in xrange(len(s_sample)):
+        for i in range(len(s_sample)):
             key = "%d_%s"%(s_sample[i], a_sample[i])
             n[key]      += 1.0;
             qfunc[key]   = (qfunc[key] * (n[key]-1) + g) / n[key]            
@@ -114,7 +114,7 @@ def sarsa(num_iter1, alpha, epsilon):
             key = "%d_%s"%(s,a)
             qfunc[key] = 0.0
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
 
         x.append(iter1)
         y.append(compute_error(qfunc))
@@ -147,7 +147,7 @@ def qlearning(num_iter1, alpha, epsilon):
             qfunc[key] = 0.0
 
 
-    for iter1 in xrange(num_iter1):
+    for iter1 in range(num_iter1):
         x.append(iter1)
         y.append(compute_error(qfunc))
 
